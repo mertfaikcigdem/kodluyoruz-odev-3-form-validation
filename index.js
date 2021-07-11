@@ -1,3 +1,4 @@
+// html elemanlarını değişkenlere atıyoruz
 const form = document.getElementById("form1");
 const userName = document.getElementById("userName");
 const password = document.getElementById("password");
@@ -5,16 +6,18 @@ const email = document.getElementById("email");
 const checkbox = document.getElementById("checkbox");
 let span = document.getElementById("error");
 
+// form'a "submit" eventi ekliyoruz
 form.addEventListener("submit", e => {
     e.preventDefault();
     checkInputs();
 })
-
+// değerlerin başında ve sonunda olabilecek boşluklardan arındırıp yeni bir değişkene atıyoruz
 function checkInputs() {
     const userNameValue = userName.value.trim();
     const passwordValue = password.value.trim();
     const emailValue = email.value.trim();
 
+	// validation sorguları
     if (userNameValue === "") {
         errorMessage(userName,"Lütfen bu alanı doldurunuz")
         userName.setAttribute("style","border:1px solid red;")
@@ -39,17 +42,17 @@ function checkInputs() {
         errorMessage(checkbox,"Lütfen bu alanı doldurunuz")
     }
 }
-
+// hata mesajlarını vermemizi sağlayan fonksiyon
 function errorMessage(input,message) {
     const formBody = input.parentElement;
     const span = formBody.querySelector("span");
     span.innerText = message;
 }
-
+// email kontrolünü sağlayan fonksiyon
 function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
-
+// validationların sağlandığı zaman hata mesajlarını ortadan kaldıran fonksiyon
 function inputChange(input) {
     let newInput = input.parentElement;
     let newSpan = newInput.querySelector("span")
